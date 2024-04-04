@@ -9,7 +9,7 @@ function Counter() {
     setCount(--count);
   };
   return (
-    <div>
+    <div className="card bg-secondary text-white">
       <h3>Increment and Decrement</h3>
       <p>
         <button onClick={incrementHandler}>Increment</button>

@@ -10,9 +10,11 @@ function GenerateRandom() {
   return (
     <div>
       <h3>Generate Random Numbers</h3>
-      <button onClick={randomHandler}>Generate</button>
-      &nbsp;
-      <span>{randomValue}</span>
+      <div className="card bg-secondary text-white">
+        <button onClick={randomHandler}>Generate</button>
+        &nbsp;
+        <span>{randomValue}</span>
+      </div>
     </div>
   );
 }

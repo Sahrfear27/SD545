@@ -21,11 +21,14 @@ function ConvertTemperature() {
   };
 
   return (
-    <div>
-      <h3>Comvert Temperature</h3>
-      <label>Enter Temperature</label>
-      &nbsp;
-      <input type="number" value={inputValue} onChange={handleChange} />
+    <div className="card bg-info text-white">
+      <h3>Convert Temperature</h3>
+      <p>
+        <label>Enter Temperature</label>
+        &nbsp;
+        <input type="number" value={inputValue} onChange={handleChange} />
+      </p>
+
       <p>
         <button onClick={convertToCelcius}>Convert to Celcius</button>
         &nbsp;

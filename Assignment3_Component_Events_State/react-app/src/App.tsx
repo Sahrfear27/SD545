@@ -4,13 +4,15 @@ import GenerateRandom from "./App_Generate_Random";
 function App() {
   return (
     <>
-      <Counter />
-      <br></br>
-      <br></br>
-      <ConvertTemperature />
-      <br></br>
-      <br></br>
-      <GenerateRandom />
+      <div className="container p-5 my-5 bg-dark text-white text-center border">
+        <Counter />
+        <br></br>
+        <br></br>
+        <ConvertTemperature />
+        <br></br>
+        <br></br>
+        <GenerateRandom />
+      </div>
     </>
   );
 }
