@@ -99,7 +99,7 @@ function NewComment(props: Props) {
 
   // Delete Handler
   const deleteHandler = (rid: number | string) => {
-    //  Pass the id
+    //  Pass the id abd move expression to parent
     const result = addCommentList.filter((comments) => comments.rpid !== rid);
     onGetUpdate(result);
   };
