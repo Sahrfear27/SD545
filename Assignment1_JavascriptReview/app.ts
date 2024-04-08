@@ -6,12 +6,21 @@ function sum(arr: number[]) {
 const num = [10, 11, 25, 18, 30, 40, 21];
 console.log(sum(num));
 
+function sum2(arr: number[]) {
+  return arr.filter((element) => element > 20)
+        .reduce((accum, curr) => (accum + curr), 0);
+  
+}
+const num2 = [10, 11, 25, 18, 30, 40, 21];
+console.log(sum(num));
+console.log(sum2(num2));
+
 
 
 
 const getNewArray = function (stringArray: string[]) {
-    const result = stringArray.filter((element) => (element.length >= 5 && element.includes("a")));
-    return result;
+    return stringArray.filter((element) => (element.length >= 5 && element.includes("a")));
+    // return result;
 
 };
 const words = ["Bilbo", "Gandalf", "Nazgul", "boy", "Mango"];
