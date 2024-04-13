@@ -1,31 +1,35 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, KeyboardEvent, MouseEvent, useState } from "react";
+import Todo from "../../Types/type";
 import "./header.css";
+import { nanoid } from "nanoid";
 
-type HeaderTodo = {
-  addItems: (name: string) => void;
+type HeaderTodos = {
+  onAddItem: (newTodo: Todo) => void;
 };
-function Header(props: HeaderTodo) {
-  const [task, setTask] = useState("");
-  const { addItems } = props;
-  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setTask(e.currentTarget.value);
-  };
+function Header(props: HeaderTodos) {
+  // const [task, setTask] = useState("");
+  const { onAddItem } = props;
 
-  const handleButton = () => {
-    if (task !== "") {
-      addItems(task);
-      setTask("");
+  const handleInput = (e: KeyboardEvent<HTMLInputElement>) => {
+    const result = e.currentTarget.value;
+    const newList = {
+      id: nanoid(),
+      name: result,
+      done: false,
+    };
+    if (result.trim()) {
+      if (e.key == "Enter") {
+        onAddItem(newList);
+        e.currentTarget.value = "";
+      }
+    } else {
+      alert(`Task cannot be empty`);
     }
   };
+
   return (
     <div className="todo-header">
-      <input
-        type="text"
-        placeholder="Enter task name"
-        value={task}
-        onChange={handleInput}
-      />
-      <button onClick={handleButton}>Add Items</button>
+      <input type="text" placeholder="Enter task name" onKeyUp={handleInput} />
     </div>
   );
 }

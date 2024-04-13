@@ -8,10 +8,19 @@ function Footer(props: FooterPrps) {
   return (
     <div className="todo-footer">
       <label>
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          checked={
+            items.filter((todo) => todo.done).length === items.length &&
+            items.length !== 0
+          }
+        />
       </label>
       <span>
-        <span>Finished 0</span> / total {items.length}
+        <span>
+          Finished {items.filter((items) => items.done == true).length}{" "}
+        </span>{" "}
+        / total {items.length}
       </span>
       <button className="btn btn-danger">Delete Finished Tasks</button>
     </div>

@@ -19,26 +19,44 @@ function App() {
   }, []);
 
   // Add new Item: This contain the initial state variable for the list
-  const addItem = (itemName: string) => {
-    const data: Todo = {
-      id: (todos.length + 1).toString(),
-      name: itemName,
-      done: false,
-    };
-    setTodo([...todos, data]);
-  };
+  // const addItem = (itemName: string) => {
+  //   const data: Todo = {
+  //     id: (todos.length + 1).toString(),
+  //     name: itemName,
+  //     done: false,
+  //   };
+  //   setTodo([...todos, data]);
+  // };
 
+  // Second Option
+  const addItem2 = (newtoDo: Todo) => {
+    setTodo([...todos, newtoDo]);
+  };
   // Delete One Item:
   const deleteOne = (id: string) => {
     const data = todos.filter((items) => items.id !== id);
     setTodo(data);
   };
 
+  const updatetodo = (id: string) => {
+    // Fine the todo which you checked, then change done to be not done (The opposeit of done)
+    const newTodo = todos.map((element) => {
+      if (element.id === id) {
+        return { ...element, done: !element.done };
+      } else {
+        return element;
+      }
+    });
+    setTodo(newTodo);
+  };
+
   return (
     <div className="todo-container">
       <div className="todo-wrap">
-        <Header addItems={addItem} />
-        <List items={todos} deleteItem={deleteOne} />
+        {/* <Header addItems={addItem} /> */}
+        <Header onAddItem={addItem2} />
+        {/* <List items={todos} deleteItem={deleteOne} /> */}
+        <List items={todos} oneUpdateTodo={updatetodo} deleteItem={deleteOne} />
         <Footer items={todos} />
       </div>
     </div>
