@@ -8,6 +8,8 @@ import Todo from "./Types/type";
 import "./App.css";
 function App() {
   const [todos, setTodo] = useState<Todo[]>([]);
+  // const [footer, setFooter] = useState(false);
+
   // Fetch the data from server
   useEffect(() => {
     async function getItems() {
@@ -39,10 +41,10 @@ function App() {
   };
 
   const updatetodo = (id: string) => {
-    // Fine the todo which you checked, then change done to be not done (The opposeit of done)
+    // Find the todo which you checked, then change done to be not done (The opposit of done)
     const newTodo = todos.map((element) => {
       if (element.id === id) {
-        return { ...element, done: !element.done };
+        return { ...element, done: !element.done }; //done == false
       } else {
         return element;
       }
@@ -50,14 +52,30 @@ function App() {
     setTodo(newTodo);
   };
 
+  const checkAll = () => {
+    const allDone = todos.every((todo) => todo.done); //false: Indicating not all todos.done are true
+    const newTodo = todos.map((todo) => ({ ...todo, done: !allDone }));
+    // setFooter(!allDone); //set done:true
+    setTodo(newTodo); //set done:true
+  };
+
+  // Delete All Checked items
+  const deleteAll = () => {
+    const uncheckItem = todos.filter((items) => !items.done); //return items that are not check
+    setTodo(uncheckItem);
+    // setFooter(false);
+  };
+
   return (
     <div className="todo-container">
       <div className="todo-wrap">
-        {/* <Header addItems={addItem} /> */}
         <Header onAddItem={addItem2} />
-        {/* <List items={todos} deleteItem={deleteOne} /> */}
         <List items={todos} oneUpdateTodo={updatetodo} deleteItem={deleteOne} />
-        <Footer items={todos} />
+        <Footer
+          items={todos}
+          updateFooterTodo={checkAll}
+          dlelteAllItems={deleteAll}
+        />
       </div>
     </div>
   );

@@ -2,9 +2,19 @@ import Todo from "../../Types/type";
 import "./footer.css";
 type FooterPrps = {
   items: Todo[];
+  updateFooterTodo: () => void;
+  dlelteAllItems: () => void;
 };
 function Footer(props: FooterPrps) {
-  const { items } = props;
+  const { items, updateFooterTodo, dlelteAllItems } = props;
+
+  const handleClick = () => {
+    updateFooterTodo();
+  };
+
+  const handleButton = () => {
+    dlelteAllItems();
+  };
   return (
     <div className="todo-footer">
       <label>
@@ -14,6 +24,7 @@ function Footer(props: FooterPrps) {
             items.filter((todo) => todo.done).length === items.length &&
             items.length !== 0
           }
+          onChange={handleClick}
         />
       </label>
       <span>
@@ -22,7 +33,9 @@ function Footer(props: FooterPrps) {
         </span>{" "}
         / total {items.length}
       </span>
-      <button className="btn btn-danger">Delete Finished Tasks</button>
+      <button className="btn btn-danger" onClick={handleButton}>
+        Delete Finished Tasks
+      </button>
     </div>
   );
 }
