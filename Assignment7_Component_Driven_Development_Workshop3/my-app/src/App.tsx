@@ -10,7 +10,7 @@ function App() {
   const [todos, setTodo] = useState<Todo[]>([]);
   // const [footer, setFooter] = useState(false);
 
-  // Fetch the data from server
+  // Fetch the data from
   useEffect(() => {
     async function getItems() {
       const response: Response = await fetch("http://localhost:7003/todos");
