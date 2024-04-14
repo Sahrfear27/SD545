@@ -20,18 +20,7 @@ function App() {
     getItems();
   }, []);
 
-  // Add new Item: This contain the initial state variable for the list
-  // const addItem = (itemName: string) => {
-  //   const data: Todo = {
-  //     id: (todos.length + 1).toString(),
-  //     name: itemName,
-  //     done: false,
-  //   };
-  //   setTodo([...todos, data]);
-  // };
-
-  // Second Option
-  const addItem2 = (newtoDo: Todo) => {
+  const addNewItem = (newtoDo: Todo) => {
     setTodo([...todos, newtoDo]);
   };
   // Delete One Item:
@@ -52,7 +41,7 @@ function App() {
     setTodo(newTodo);
   };
 
-  const checkAll = () => {
+  const allCheckedItems = () => {
     const allDone = todos.every((todo) => todo.done); //false: Indicating not all todos.done are true
     const newTodo = todos.map((todo) => ({ ...todo, done: !allDone }));
     // setFooter(!allDone); //set done:true
@@ -60,7 +49,7 @@ function App() {
   };
 
   // Delete All Checked items
-  const deleteAll = () => {
+  const deleteFinishedTask = () => {
     const uncheckItem = todos.filter((items) => !items.done); //return items that are not check
     setTodo(uncheckItem);
     // setFooter(false);
@@ -69,12 +58,12 @@ function App() {
   return (
     <div className="todo-container">
       <div className="todo-wrap">
-        <Header onAddItem={addItem2} />
+        <Header onAddItem={addNewItem} />
         <List items={todos} oneUpdateTodo={updatetodo} deleteItem={deleteOne} />
         <Footer
           items={todos}
-          updateFooterTodo={checkAll}
-          dlelteAllItems={deleteAll}
+          updateFooterTodo={allCheckedItems}
+          dlelteAllItems={deleteFinishedTask}
         />
       </div>
     </div>
