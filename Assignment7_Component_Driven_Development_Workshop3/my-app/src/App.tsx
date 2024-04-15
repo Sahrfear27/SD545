@@ -8,7 +8,6 @@ import Todo from "./Types/type";
 import "./App.css";
 function App() {
   const [todos, setTodo] = useState<Todo[]>([]);
-  // const [footer, setFooter] = useState(false);
 
   // Fetch the data from
   useEffect(() => {
@@ -44,15 +43,13 @@ function App() {
   const allCheckedItems = () => {
     const allDone = todos.every((todo) => todo.done); //false: Indicating not all todos.done are true
     const newTodo = todos.map((todo) => ({ ...todo, done: !allDone }));
-    // setFooter(!allDone); //set done:true
     setTodo(newTodo); //set done:true
   };
 
   // Delete All Checked items
-  const deleteFinishedTask = () => {
-    const uncheckItem = todos.filter((items) => !items.done); //return items that are not check
-    setTodo(uncheckItem);
-    // setFooter(false);
+  const deleteFinishedTask = (items: Todo[]) => {
+    const remainingItem = items.filter((items) => !items.done);
+    setTodo(remainingItem);
   };
 
   return (
@@ -63,7 +60,7 @@ function App() {
         <Footer
           items={todos}
           updateFooterTodo={allCheckedItems}
-          dlelteAllItems={deleteFinishedTask}
+          onGetDelete={deleteFinishedTask}
         />
       </div>
     </div>

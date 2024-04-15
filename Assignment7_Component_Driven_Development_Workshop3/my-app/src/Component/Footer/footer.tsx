@@ -3,17 +3,21 @@ import "./footer.css";
 type FooterPrps = {
   items: Todo[];
   updateFooterTodo: () => void;
-  dlelteAllItems: () => void;
+  onGetDelete: (todo: Todo[]) => void;
 };
 function Footer(props: FooterPrps) {
-  const { items, updateFooterTodo, dlelteAllItems } = props;
+  const { items, updateFooterTodo, onGetDelete } = props;
 
   const handleClick = () => {
     updateFooterTodo();
   };
 
+  // Check if total items checked is the same as total
   const handleButton = () => {
-    dlelteAllItems();
+    const result = items.filter((todo) => todo.done);
+    if (result.length === items.length) {
+      onGetDelete(items);
+    }
   };
   return (
     <div className="todo-footer">
