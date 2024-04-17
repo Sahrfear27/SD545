@@ -1,21 +1,41 @@
-import { ChangeEvent, useState } from "react";
-import { User } from "../../Types/types";
+import { useRef } from "react";
 import axios from "axios";
+import PubSub from "pubsub-js";
 
-type Props = {
-  onGetResponse: (response: User[]) => void;
-};
+function Search() {
+  // Use uncontrol component
+  const inputRef = useRef<HTMLInputElement>(null);
 
-function Search(props: Props) {
-  const { onGetResponse } = props;
-  const [keyword, setkeyword] = useState("");
   const search = async () => {
-    const response = await axios.get(
-      `https://api.github.com/search/users?q=${keyword}`
-    );
-    // if (response.status === 200) {
-    onGetResponse(response.data.items);
-    // }
+    // Inside here the keyword would be type and search for already
+
+    // Publish the subscriber to the component using the data
+    try {
+      PubSub.publish("SD540", {
+        isFirst: false,
+        isLoading: true,
+        isError: false,
+        user: [],
+      });
+      const response = await axios.get(
+        `https://api.github.com/search/users?q=${inputRef.current?.value}`
+      );
+      if (response.status == 200) {
+        PubSub.publish("SD540", {
+          isFirst: false,
+          isLoading: false,
+          isError: false,
+          user: response.data.items,
+        });
+      }
+    } catch (e) {
+      PubSub.publish("SD540", {
+        isFirst: false,
+        isLoading: false,
+        isError: true,
+        user: [],
+      });
+    }
   };
   return (
     <>
@@ -26,10 +46,7 @@ function Search(props: Props) {
             <input
               type="text"
               placeholder="enter the name you search"
-              value={keyword}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setkeyword(e.currentTarget.value)
-              }
+              ref={inputRef}
             />
             &nbsp;<button onClick={search}>Search</button>
           </div>
