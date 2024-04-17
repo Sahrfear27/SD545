@@ -5,9 +5,7 @@ import Search from "./Components/Search/search";
 
 function App() {
   const [searchResponse, setSearchResponse] = useState<User[]>([]);
-  // const [searchResponse, setSearchResponse] = useState<>({
-  //   isFirst:true,isLoading:true,isError:false, user:[]
-  // });
+
   const getSearchResponse = (response: User[]) => {
     setSearchResponse(response);
   };
