@@ -1,7 +1,7 @@
 // import HomePage from "./Pages/about";
 import { NavLink, Routes, Route } from "react-router-dom";
 import classNames from "classnames";
-// import "./App.css";
+import "./App.css";
 import Home from "./Pages/home";
 import About from "./Pages/about";
 function App() {
