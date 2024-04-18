@@ -1,10 +1,10 @@
-// import HomePage from "./Pages/about";
-import { NavLink, Routes, Route } from "react-router-dom";
-import classNames from "classnames";
+import { NavLink, Routes, Route, Navigate, useRoutes } from "react-router-dom";
 import "./App.css";
-import Home from "./Pages/home";
-import About from "./Pages/about";
+import classNames from "classnames";
+import routes from "./Routes/routes";
+
 function App() {
+  const elements = useRoutes(routes);
   return (
     <div className="container">
       <header className="d-flex flex-wrap justify-content-center py-3 mb-3 border-bottom">
@@ -42,14 +42,7 @@ function App() {
             </ul>
           </div>
         </div>
-        <div className="col-9">
-          <Routes>
-            <Route path="/home" element={<Home />}></Route>
-            <Route path="/about" element={<About />}></Route>
-            <Route path="/" element={<Navigate to="/home" />}></Route>
-            <Route path="*" element={<PageNotFound />}></Route>
-          </Routes>
-        </div>
+        <div className="col-9">{elements}</div>
       </div>
     </div>
   );
